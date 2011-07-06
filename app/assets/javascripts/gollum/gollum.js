@@ -33,7 +33,7 @@ $(document).ready(function() {
                               if ( res['name'] )
                                 var n = res['name'];
                               n = encodeURIComponent( n );
-                              window.location = '/' + n;
+                              window.location = '/wiki/' + n;
                             }
                           });
     });

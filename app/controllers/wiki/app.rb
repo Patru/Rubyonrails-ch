@@ -69,7 +69,7 @@ module Wiki
       update_wiki_page(wiki, page.sidebar, params[:sidebar], commit) if params[:sidebar]
       committer.commit
 
-      redirect "/blog/#{CGI.escape(Gollum::Page.cname(name))}"
+      redirect "/wiki/#{CGI.escape(Gollum::Page.cname(name))}"
     end
 
     post '/create' do
@@ -80,7 +80,7 @@ module Wiki
 
       begin
         wiki.write_page(name, format, params[:content], commit_message)
-        redirect "/blog/#{CGI.escape(name)}"
+        redirect "/wiki/#{CGI.escape(name)}"
       rescue Gollum::DuplicatePageError => e
         @message = "Duplicate page: #{e.message}"
         mustache :error
@@ -96,7 +96,7 @@ module Wiki
       sha2  = shas.shift
 
       if wiki.revert_page(@page, sha1, sha2, commit_message)
-        redirect "/blog/#{CGI.escape(@name)}"
+        redirect "/wiki/#{CGI.escape(@name)}"
       else
         sha2, sha1 = sha1, "#{sha1}^" if !sha2
         @versions = [sha1, sha2]
@@ -127,9 +127,9 @@ module Wiki
     post '/compare/:name' do
       @versions = params[:versions] || []
       if @versions.size < 2
-        redirect "/blog/history/#{CGI.escape(params[:name])}"
+        redirect "/wiki/history/#{CGI.escape(params[:name])}"
       else
-        redirect "/blog/compare/%s/%s...%s" % [
+        redirect "/wiki/compare/%s/%s...%s" % [
           CGI.escape(params[:name]),
           @versions.last,
           @versions.first]
