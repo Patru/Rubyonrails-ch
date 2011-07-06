@@ -7,7 +7,7 @@ RubyOnRailsCh::Application.routes.draw do
   resources :users, :only => :show
   
   
-  mount Precious::App => "/blog"
+  mount Wiki::App => "/blog"
   
 
   # The priority is based upon order of creation:

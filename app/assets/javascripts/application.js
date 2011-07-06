@@ -6,4 +6,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+// require_tree .
+//= require gollum/gollum.js
+//= require gollum/gollum.dialog.js
+//= require gollum/gollum.placeholder.js
+//= require gollum/editor/gollum.editor.js
+
