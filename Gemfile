@@ -5,6 +5,7 @@ gem 'sass'
 gem 'coffee-script'
 gem 'uglifier'
 gem 'jquery-rails'
+gem 'sprockets', '2.0.0.beta.10'
 gem "haml", ">= 3.1.1"
 gem "haml-rails", ">= 0.3.4", :group => :development
 gem "devise", ">= 1.3.4"
