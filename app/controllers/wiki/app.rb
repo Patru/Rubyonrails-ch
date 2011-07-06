@@ -39,6 +39,12 @@ module Wiki
     configure :test do
       enable :logging, :raise_errors, :dump_errors
     end
+    
+    helpers do
+      def wiki_path(page)
+        "/wiki/#{page}"
+      end
+    end
 
     get '/' do
       show_page_or_file('Home')
@@ -68,8 +74,8 @@ module Wiki
       update_wiki_page(wiki, page.footer,  params[:footer],  commit) if params[:footer]
       update_wiki_page(wiki, page.sidebar, params[:sidebar], commit) if params[:sidebar]
       committer.commit
-
-      redirect "/wiki/#{CGI.escape(Gollum::Page.cname(name))}"
+      
+      redirect wiki_path(CGI.escape(Gollum::Page.cname(name)))
     end
 
     post '/create' do
@@ -80,7 +86,7 @@ module Wiki
 
       begin
         wiki.write_page(name, format, params[:content], commit_message)
-        redirect "/wiki/#{CGI.escape(name)}"
+        redirect wiki_path(CGI.escape(name))
       rescue Gollum::DuplicatePageError => e
         @message = "Duplicate page: #{e.message}"
         mustache :error
@@ -96,7 +102,7 @@ module Wiki
       sha2  = shas.shift
 
       if wiki.revert_page(@page, sha1, sha2, commit_message)
-        redirect "/wiki/#{CGI.escape(@name)}"
+        redirect wiki_path(CGI.escape(@name))
       else
         sha2, sha1 = sha1, "#{sha1}^" if !sha2
         @versions = [sha1, sha2]
@@ -127,7 +133,7 @@ module Wiki
     post '/compare/:name' do
       @versions = params[:versions] || []
       if @versions.size < 2
-        redirect "/wiki/history/#{CGI.escape(params[:name])}"
+        redirect wiki_path(CGI.escape(params[:name]))
       else
         redirect "/wiki/compare/%s/%s...%s" % [
           CGI.escape(params[:name]),
