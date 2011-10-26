@@ -60,3 +60,9 @@ tmp/*
 
 # vim artifacts
 **.swp
+
+# rvm
+.rvmrc
+
+# bundler
+Gemfile.lock
