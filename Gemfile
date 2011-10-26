@@ -16,6 +16,7 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
   gem 'capybara'
+  gem 'capybara_minitest_spec'
 end
 
 

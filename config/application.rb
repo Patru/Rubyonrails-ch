@@ -45,5 +45,9 @@ module RubyOnRailsCh
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    config.generators do |g|
+      g.test_framework nil # Using minitest, but don't want generators.
+    end
   end
 end
