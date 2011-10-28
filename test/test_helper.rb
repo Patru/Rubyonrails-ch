@@ -17,6 +17,8 @@ end
 require 'minitest/autorun'
 require 'capybara/rails'
 
+Capybara.default_driver=:selenium   # the main menu of our wiki makes heavy use of JavaScript
+
 # If description name ends with 'integration', use this RequestSpec class.
 # It has all the integration test goodies.
 class RequestSpec < MiniTest::Spec
